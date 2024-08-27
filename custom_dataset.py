@@ -3,9 +3,6 @@ import cv2
 from PIL import Image
 from torchvision import transforms
 from torch.utils.data import Dataset
-import scipy.io
-import numpy as np 
-from natsort import natsorted 
 
 class TrainAllDataset(Dataset):
     def __init__(self, patch_size=256):

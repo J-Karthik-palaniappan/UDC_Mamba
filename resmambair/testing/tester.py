@@ -3,12 +3,9 @@ import torch
 from PIL import Image
 from torchvision import transforms
 from tqdm import tqdm
-# from tmp_custom_dataset import TrainAllDataset, VallAll
-import sys
-sys.path.append('/home/santhi/UDC/MambaIR/MambaIR')
 
 from testing.metrics import calculate_psnr, calculate_ssim
-from realDenoising.basicsr.models.archs.mambairunet_arch import MambaIRUNet
+from ..resmambairunet_arch import MambaIRUNet
 
 # Setup CUDA device
 os.environ["CUDA_VISIBLE_DEVICES"] = "1"

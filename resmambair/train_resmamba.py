@@ -2,7 +2,6 @@ import torch
 import wandb  # Added for Weights & Biases integration
 torch.cuda.empty_cache()
 
-from tmp_custom_dataset import TrainAllDataset, VallAll
 import torch.optim as optim
 from torch.utils.data import DataLoader
 from torch.optim.lr_scheduler import ReduceLROnPlateau
@@ -11,8 +10,9 @@ from tqdm import tqdm
 import os
 import torchvision.transforms as transforms
 
-from realDenoising.basicsr.models.archs.mambairunet_arch import MambaIRUNet
-from testing.chat_gpt import process_image, get_transform, get_inv_transform
+from ..custom_dataset import TrainAllDataset, VallAll
+from resmambairunet_arch import MambaIRUNet
+from resmambair.testing.tester import process_image, get_transform, get_inv_transform
 #====================================Log in to Weights & Biases===============================
 wandb.login()
 
