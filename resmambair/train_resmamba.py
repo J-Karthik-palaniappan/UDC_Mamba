@@ -12,7 +12,7 @@ import torchvision.transforms as transforms
 import argparse
 
 from custom_dataset import AllDataset
-# from resmambair.resmambairunet_arch import MambaIRUNet
+from resmambair.resmambairunet_arch import MambaIRUNet
 from resmambair.testing.tester import process_image, get_transform, get_inv_transform
 
 def main(args):
