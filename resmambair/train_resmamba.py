@@ -12,7 +12,7 @@ import torchvision.transforms as transforms
 import argparse
 
 from custom_dataset import AllDataset
-from resmambair.resmambairunet_arch import MambaIRUNet
+# from resmambair.resmambairunet_arch import MambaIRUNet
 from resmambair.testing.tester import process_image, get_transform, get_inv_transform
 
 def main(args):
@@ -143,7 +143,7 @@ def main(args):
 if __name__ == "__main__":
     parser = argparse.ArgumentParser(description='MambaIRUNet Training Script')
 
-    parser.add_argument('--dataset', type=str, default='poled', help='poled or toled (data to be trained)')
+    parser.add_argument('--dataset', type=str, default='Poled', help='Poled or Toled (data to be trained)')
     parser.add_argument('--lr', type=float, default=0.00025, help='Learning rate')
     parser.add_argument('--batch_size', type=int, default=4, help='Batch size')
     parser.add_argument('--num_epochs', type=int, default=100, help='Number of epochs')

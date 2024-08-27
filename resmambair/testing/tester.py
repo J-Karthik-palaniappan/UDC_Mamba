@@ -4,11 +4,10 @@ from PIL import Image
 from torchvision import transforms
 from tqdm import tqdm
 
-from testing.metrics import calculate_psnr, calculate_ssim
-from ..resmambairunet_arch import MambaIRUNet
+from resmambair.testing.metrics import calculate_psnr, calculate_ssim
+from resmambair.resmambairunet_arch import MambaIRUNet
 
 # Setup CUDA device
-os.environ["CUDA_VISIBLE_DEVICES"] = "1"
 device = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
 
 # Function to load the model

@@ -72,24 +72,28 @@ if __name__ == '__main__':
     #=======================poled test=======================
     dataset1 = MatDataset(
         input_mat_file_path=r'dataset/UDC/Test/poled_test_display.mat', 
-        gt_mat_file_path=r'dataset/UDC/Test/poled_test_gt.mat'
+        gt_mat_file_path=r'dataset/UDC/Test/poled_test_gt.mat',
+        input_key='test_display', gt_key='test_gt'
     )
     dataset1.save_images_to_folders(lq_folder='dataset/UDC/Test/Poled/LQ', hq_folder='dataset/UDC/Test/Poled/HQ')
     #=======================toled test=======================
     dataset2 = MatDataset(
         input_mat_file_path=r'dataset/UDC/Test/toled_test_display.mat', 
-        gt_mat_file_path=r'dataset/UDC/Test/toled_test_gt.mat'
+        gt_mat_file_path=r'dataset/UDC/Test/toled_test_gt.mat',
+        input_key='test_display', gt_key='test_gt'
     )
     dataset2.save_images_to_folders(lq_folder='dataset/UDC/Test/Toled/LQ', hq_folder='dataset/UDC/Test/Toled/HQ')
     #=======================poled val=======================
     dataset3 = MatDataset(
         input_mat_file_path=r'dataset/UDC/Val/poled_val_display.mat', 
-        gt_mat_file_path=r'dataset/UDC/Val/poled_test_gt.mat'
+        gt_mat_file_path=r'dataset/UDC/Val/poled_test_gt.mat',
+        input_key='val_display', gt_key='val_gt'
     )
     dataset3.save_images_to_folders(lq_folder='dataset/UDC/Val/Poled/LQ', hq_folder='dataset/UDC/Val/Poled/HQ')
     #=======================toled val=======================
     dataset4 = MatDataset(
         input_mat_file_path=r'dataset/UDC/Val/toled_val_display.mat', 
-        gt_mat_file_path=r'dataset/UDC/Val/toled_val_gt.mat'
+        gt_mat_file_path=r'dataset/UDC/Val/toled_val_gt.mat',
+        input_key='val_display', gt_key='val_gt'
     )
     dataset4.save_images_to_folders(lq_folder='dataset/UDC/Val/Toled/LQ', hq_folder='dataset/UDC/Val/Toled/HQ')
