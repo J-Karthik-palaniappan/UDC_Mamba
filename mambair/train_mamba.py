@@ -10,8 +10,8 @@ from tqdm import tqdm
 import os
 import torchvision.transforms as transforms
 
-from ..custom_dataset import TrainAllDataset, VallAll
-from mambairunet_arch import MambaIRUNet
+from custom_dataset import TrainAllDataset, VallAll
+from mambair.mambairunet_arch import MambaIRUNet
 from mambair.testing.tester import process_image, get_transform, get_inv_transform
 #====================================Log in to Weights & Biases===============================
 wandb.login()
