@@ -283,6 +283,7 @@ if __name__ == '__main__':
     parser.add_argument('--expected_folder', type=str, default='dataset/UDC/Test/Poled/HQ', help='expected folder path')
     parser.add_argument('--output_folder', type=str, default='test_results/Poled', help='path to save results')
     parser.add_argument('--checkpoint_path', type=str, default=None, help='model chkpt')
+    parser.add_argument('--patch_size', type=int, default=256, help='patch size')
     
     args = parser.parse_args()
-    process_images(args.input_folder, args.expected_folder, args.output_folder, args.checkpoint_path)
+    process_images(args.input_folder, args.expected_folder, args.output_folder, args.checkpoint_path, args.patch_size)
