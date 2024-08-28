@@ -3,6 +3,7 @@ import torch
 from PIL import Image
 from torchvision import transforms
 from tqdm import tqdm
+import argparse
 
 from resmambair.testing.metrics import calculate_psnr, calculate_ssim
 from resmambair.resmambairunet_arch import MambaIRUNet
@@ -13,9 +14,9 @@ device = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
 # Function to load the model
 def load_model(checkpoint_path):
     model = MambaIRUNet()
-    checkpoint = torch.load(checkpoint_path)
-    model.load_state_dict(checkpoint['model_state_dict'])
-    # model.load_state_dict(checkpoint)
+    if checkpoint_path:
+        checkpoint = torch.load(checkpoint_path)
+        model.load_state_dict(checkpoint['model_state_dict'])
     model.to(device)
     model.eval()
     return model
@@ -244,40 +245,44 @@ def save_image(tensor, output_path):
     image.save(output_path)
 
 # Main processing function
-def process_images(input_folder, expected_folder, output_folder, checkpoint_path):
+def process_images(input_folder, expected_folder, output_folder, checkpoint_path=None, patch_size = 256):
     os.makedirs(output_folder, exist_ok=True)
     model = load_model(checkpoint_path)
     transform = get_transform()
     inv_transform = get_inv_transform()
 
     psnr_values = 0
+    test_file = open(os.path.join(output_folder, "test_results.txt"), 'w')
 
     for image_name in sorted(os.listdir(input_folder)):
         print(f"Processing {image_name}")
         image_path = os.path.join(input_folder, image_name)
         expected_path = os.path.join(expected_folder, image_name.replace('lq', 'hq'))
         
-        restored_tensor, expected_tensor, psnr_value = process_image(image_path, expected_path, model, transform, inv_transform)
+        restored_tensor, expected_tensor, psnr_value = process_image(image_path, expected_path, model, transform, inv_transform, patch_size)
 
         # Save the restored image
         output_path = os.path.join(output_folder, image_name)
         save_image(restored_tensor, output_path)
-        save_image(expected_tensor, output_path.replace('lq', 'hq'))
+        # save_image(expected_tensor, output_path.replace('lq', 'hq'))
         
-        # print(f"Saved {image_name}")
         print(f"Image: {image_name} PSNR: {psnr_value:.2f}")
+        test_file.write(f'Image: {image_name} PSNR: {psnr_value}')
         psnr_values += psnr_value
-    avg = psnr_values/30
 
-    print(f"Average PSNR: {avg:.2f}")#, SSIM: {ssim_value:.4f}")
+    avg = psnr_values/30
+    print(f"Average PSNR: {avg:.2f}")
+    test_file.write(f"Average PSNR: {avg:.2f}")
+    test_file.close()
 
     print(f"Restored images saved to {output_folder}")
 
 if __name__ == '__main__':
-    input_folder = '../../../test_pol_cre/LQ'
-    expected_folder  = '../../../test_pol_cre/HQ'
-    output_folder = '../final_pol_test_seamless'
-    # checkpoint_path = '../org_chkpt/checkpoint_msr_36.pt'
-    checkpoint_path = '../poled_chkpt/checkpoint_pol_msr_30.pt'
-    # checkpoint_path = '../best_msr.pt'
-    process_images(input_folder, expected_folder, output_folder, checkpoint_path)
+    parser = argparse.ArgumentParser(description='MambaIRUNet Training Script')
+    parser.add_argument('--input_folder', type=str, default='dataset/UDC/Test/Poled/LQ', help='input folder path')
+    parser.add_argument('--expected_folder', type=str, default='dataset/UDC/Test/Poled/HQ', help='expected folder path')
+    parser.add_argument('--output_folder', type=str, default='test_results/Poled', help='path to save results')
+    parser.add_argument('--checkpoint_path', type=str, default=None, help='model chkpt')
+    
+    args = parser.parse_args()
+    process_images(args.input_folder, args.expected_folder, args.output_folder, args.checkpoint_path)
