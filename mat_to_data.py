@@ -86,7 +86,7 @@ if __name__ == '__main__':
     #=======================poled val=======================
     dataset3 = MatDataset(
         input_mat_file_path=r'dataset/UDC/Val/poled_val_display.mat', 
-        gt_mat_file_path=r'dataset/UDC/Val/poled_test_gt.mat',
+        gt_mat_file_path=r'dataset/UDC/Val/poled_val_gt.mat',
         input_key='val_display', gt_key='val_gt'
     )
     dataset3.save_images_to_folders(lq_folder='dataset/UDC/Val/Poled/LQ', hq_folder='dataset/UDC/Val/Poled/HQ')
