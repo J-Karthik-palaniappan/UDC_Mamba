@@ -44,7 +44,7 @@ def main(args):
 
     #====================================data loading===============================
     train_dataset = AllDataset(patch_size=args.patch_size, path = r'dataset/UDC/Train/{}'.format(args.dataset))
-    val_dataset = AllDataset(patch_size=args.patch_size, path = r'dataset/UDC/Val/Poled/{}'.format(args.dataset))
+    val_dataset = AllDataset(patch_size=args.patch_size, path = r'dataset/UDC/Val/{}'.format(args.dataset))
 
     scheduler = ReduceLROnPlateau(optimizer, mode='min', factor=0.5, patience=4)
 
