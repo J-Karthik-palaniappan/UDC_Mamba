@@ -1,4 +1,4 @@
-# ResMambaIR
+# UDC Mamba
 Thank you MambaIR
 
 ## Dataset
