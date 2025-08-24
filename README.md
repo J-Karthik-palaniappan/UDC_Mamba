@@ -1,5 +1,6 @@
 # UDC Mamba
 Thank you MambaIR
+This is our publication to CVIP 2024.
 
 ## Dataset
 Download data from kaggle
